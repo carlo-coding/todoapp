@@ -5,8 +5,22 @@ const hours = document.getElementById('time_input_hours');
 const minutes = document.getElementById("time_input_minutes");
 
 // INTERACTION WITH LOCALSTORAGE
-export const getTasks = ()=> (JSON.parse(localStorage.getItem("tasks"))||[]);
-export const saveTasks = (tasks) => localStorage.setItem("tasks", JSON.stringify(tasks));
+export const getTasks = ()=> {
+  try {
+    return JSON.parse(localStorage.getItem("tasks"))||[]
+  }catch(err){
+    console.log(err);
+    return [];
+  }
+};
+export const saveTasks = (tasks) => {
+  try {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }catch(err){
+    console.log(err);
+    localStorage.removeItem("tasks")
+  }
+};
 
 export const saveTask = (updateState)=> ({name, hours, minutes}) => {
   const id = createId();

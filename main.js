@@ -25,8 +25,8 @@ const target = (index) => (event) => {
   const tasks = getTasks();
   const draggedIndex = parseFloat(event.dataTransfer.getData("index"));
   const movedTasks = arrayMoveImmutable(tasks, draggedIndex, index);
-  saveTasks(updateState)(movedTasks);
-  displayTasks();
+  saveTasks(movedTasks);
+  updateState();
 }
 
 // DISPLAY TASKS
